@@ -720,6 +720,8 @@ public class SkinSenseFrame extends Application {
                 ex.printStackTrace();
             }
         });
+
+
         Scene scene = new Scene(borderPane, 500, 300);
         newWindow.initModality(Modality.WINDOW_MODAL);
         newWindow.setScene(scene);
