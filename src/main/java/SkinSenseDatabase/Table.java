@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.scene.control.TableView;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -47,7 +48,7 @@ public class Table extends Application
         BorderPane borderPane = new BorderPane();
 
         // Create a TableView with a list of persons
-        javafx.scene.control.TableView<PatientTableView> table = new javafx.scene.control.TableView<>();
+        TableView<PatientTableView> table = new TableView<>();
         // Add rows to the TableView
         table.getItems().addAll(TableViewHelper.getPersonList());
         // Add columns to the TableView

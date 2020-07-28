@@ -105,7 +105,6 @@ public class CSVRead {
         for (int i=7; i<71; i+=4)
         {
             arrayList.add(new Alergen(Integer.parseInt(metadata[i]),Integer.parseInt(metadata[i+1]),Double.parseDouble(metadata[i+2]),Integer.parseInt(metadata[i+3])));
-            System.out.println(new Alergen(Integer.parseInt(metadata[i]),Integer.parseInt(metadata[i+1]),Double.parseDouble(metadata[i+2]),Integer.parseInt(metadata[i+3])));
         }
 
         return new Patient(ID,birthDate,gender,age,bmi,prickDate,inVitroDate,arrayList);

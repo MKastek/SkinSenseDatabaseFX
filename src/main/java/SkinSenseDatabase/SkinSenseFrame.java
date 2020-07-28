@@ -380,7 +380,6 @@ public class SkinSenseFrame extends Application {
         gridPane.setPadding(new Insets(10, 10, 10, 30));
 
         LArm1= new PatientImage();
-        LArm1.viewImage.setSmooth(true);
         LArm2 = new PatientImage();
         LArm3 = new PatientImage();
 
@@ -428,6 +427,7 @@ public class SkinSenseFrame extends Application {
 
         borderPane.setCenter(gridPane);
 
+        //Arraylist of GUI elements
         EVlist = new ArrayList<CheckBox>(16) {
             {
                 add(HistaminaREvaluation);
@@ -492,6 +492,7 @@ public class SkinSenseFrame extends Application {
         Scene scene = new Scene(borderPane);
         window.setScene(scene);
         window.show();
+        SkinSenseDataBase.createDB();
     }
 
     private boolean IDisInt(TextField input) {
@@ -538,7 +539,6 @@ public class SkinSenseFrame extends Application {
         else patientGender.setText("Gender: " + "male");
         patientBMI.setText("BMI: " + patient.getBMI());
 
-        //poprawka
         for (int i = 0; i < 16; i++) {
             if (patient.alergeny.get(i).evaluation == 1)
             {
@@ -627,7 +627,6 @@ public class SkinSenseFrame extends Application {
                     if(stringFolder.equals("0")) patient.RArm2FilePathBT=ImageArray[i].toString();
                     if(stringFolder.equals("1")) patient.RArm2FilePathAT=ImageArray[i].toString();
             }
-
             if (ImageArray[i].toString().charAt(13) == '3' && ImageArray[i].toString().charAt(39) == '1') {
                 //System.out.println("RARM3:  "+ImageArray[i].toString());
                     RArm3.load(ImageArray[i].toString());
@@ -721,11 +720,9 @@ public class SkinSenseFrame extends Application {
                 ex.printStackTrace();
             }
         });
-
         Scene scene = new Scene(borderPane, 500, 300);
         newWindow.initModality(Modality.WINDOW_MODAL);
         newWindow.setScene(scene);
         newWindow.show();
-
     }
 }

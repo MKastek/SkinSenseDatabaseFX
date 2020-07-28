@@ -12,7 +12,7 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
-
+import com.itextpdf.layout.element.Table;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -74,11 +74,11 @@ public class PatientPDF {
         float [] pointColumnWidths2 = {150F,75F,75F,75F,75F};
         float [] pointColumnWidths3 = {170F,170F,170F};
 
-        com.itextpdf.layout.element.Table dataTable1 = new  com.itextpdf.layout.element.Table(pointColumnWidths1);
-        com.itextpdf.layout.element.Table dataTable2 = new  com.itextpdf.layout.element.Table(pointColumnWidths2);
-        com.itextpdf.layout.element.Table dataTable3 = new  com.itextpdf.layout.element.Table(pointColumnWidths2);
-        com.itextpdf.layout.element.Table table1 = new  com.itextpdf.layout.element.Table(pointColumnWidths3);
-        com.itextpdf.layout.element.Table table2 = new  com.itextpdf.layout.element.Table(pointColumnWidths3);
+        Table dataTable1 = new  Table(pointColumnWidths1);
+        Table dataTable2 = new  Table(pointColumnWidths2);
+        Table dataTable3 = new  Table(pointColumnWidths2);
+        Table table1 = new Table(pointColumnWidths3);
+        Table table2 = new  Table(pointColumnWidths3);
 
         PdfFont font = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD);
         Text title = new Text("Report "+"Patient "+ID).setFont(font).setFontSize(15F);
@@ -182,8 +182,9 @@ public class PatientPDF {
         ImageData RArm3AT = ImageDataFactory.create(patient.RArm3FilePathAT);
         Image RArm3imageAT = new Image(RArm3AT);
 
-
-        document.add(new Paragraph( "\n"));
+        document.add(new Paragraph( "\n\n\n\n\n"));
+        Text titleBeforeTest = new Text("Before Test").setFont(font).setFontSize(13F);
+        Paragraph beforeTest = new Paragraph().add(titleBeforeTest);
 
         table1.addCell(LArm1imageBT.scaleToFit(160,120));
         table1.addCell(LArm2imageBT.scaleToFit(160,170));
@@ -193,6 +194,9 @@ public class PatientPDF {
         table1.addCell(RArm3imageBT.scaleToFit(160,170));
 
         document.add(new Paragraph( "\n"));
+        Text titleAfterTest = new Text("After Test").setFont(font).setFontSize(13F);
+        Paragraph afterTest = new Paragraph().add(titleAfterTest);
+
 
         table2.addCell(LArm1imageAT.scaleToFit(160,120));
         table2.addCell(LArm2imageAT.scaleToFit(160,170));
@@ -201,9 +205,12 @@ public class PatientPDF {
         table2.addCell(RArm2imageAT.scaleToFit(160,170));
         table2.addCell(RArm3imageAT.scaleToFit(160,170));
 
+        document.add(beforeTest);
         document.add(table1);
         document.add(new Paragraph( "\n"));
+        document.add(afterTest);
         document.add(table2);
+
         document.add(new Paragraph( "User comment: \n").setBold());
         document.add(new Paragraph( comment));
         document.close();

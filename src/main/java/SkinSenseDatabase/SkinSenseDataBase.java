@@ -4,13 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
 
 
 public class SkinSenseDataBase {
     static Connection conn;
-    public static void main(String[] args) throws SQLException {
+    public static void createDB() throws SQLException {
         Connection conn = null;
         try {
             //conn = DriverManager.getConnection("jdbc:mysql://db4free.net/testdatabase2341", "mkastek",
