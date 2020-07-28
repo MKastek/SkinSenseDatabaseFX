@@ -5,6 +5,8 @@ Courtesy of the MILTON ESSEX SA consortium, program uses real data from test of 
 User can compare images before and after test and generate PDF report with comments. The program also allows to sort and filter patient data. 
 
 ## Screens
-![alt text](https://github.com/MKastek/SkinSenseDatabaseFX/blob/master/mainFrame.png)
+![alt text](https://github.com/MKastek/SkinSenseDatabaseFX/blob/master/Readme/ReadmeScreen1.png)
+![alt text](https://github.com/MKastek/SkinSenseDatabaseFX/blob/master/Readme/ReadmeScreen2.png)
 
 ## Report
+[Report](https://github.com/MKastek/SkinSenseDatabaseFX/blob/master/Readme/Patient45.pdf)
