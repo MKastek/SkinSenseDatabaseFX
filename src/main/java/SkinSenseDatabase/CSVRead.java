@@ -21,12 +21,10 @@ public class CSVRead {
 
     public static void main(String filePath) {
         List<Patient> patients = readPatientsFromCSV(filePath);
-        System.out.println(patients.get(10).toString());
         Connection conn;
         try{
-            conn = DriverManager.getConnection(	"jdbc:h2:./test", "sa", "");
-            String updateString = "INSERT INTO Pacjenci (Id,`BirthDate`,`Gender`,`Age`,`Bmi`,`PrickDate`,`InVitroDate`,";
-
+            conn = DriverManager.getConnection(	"jdbc:h2:./SkinSense", "SkinSense", "");
+            StringBuilder updateString = new StringBuilder("INSERT INTO Pacjenci (Id,`BirthDate`,`Gender`,`Age`,`Bmi`,`PrickDate`,`InVitroDate`,");
             for(int i=0; i<16; i++)
             {
                 String alergenString="`"+ Patient.alergenyString.get(i)+"bubble"+"`,"+
@@ -34,18 +32,14 @@ public class CSVRead {
                         "`"+ Patient.alergenyString.get(i)+"probability"+"`,"+
                         "`"+ Patient.alergenyString.get(i)+"AI`";
                 if(i!=15) alergenString+=",";
-                updateString+=alergenString;
+                updateString.append(alergenString);
             }
-            updateString+=") VALUES (";
-            for(int i=0; i<70; i++)
-            {
-                updateString+="?, ";
-            }
-            updateString+="?);";
-
+            updateString.append(") VALUES (");
+            updateString.append("?, ".repeat(70));
+            updateString.append("?);");
 
             PreparedStatement statement;
-            statement=conn.prepareStatement(updateString);
+            statement=conn.prepareStatement(updateString.toString());
             for(Patient patient:patients)
             {
                 statement.setInt(1,patient.getID());

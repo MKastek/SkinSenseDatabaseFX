@@ -12,9 +12,8 @@ public class SkinSenseDataBase {
     public static void createDB() throws SQLException {
         Connection conn = null;
         try {
-            //conn = DriverManager.getConnection("jdbc:mysql://db4free.net/testdatabase2341", "mkastek",
-              //              "Imk12345!");
-            conn = DriverManager.getConnection(	"jdbc:h2:./test", "sa", "");
+            //conn = DriverManager.getConnection("jdbc:mysql://db4free.net/testdatabase2341", "mkastek", "Imk12345!");
+            conn = DriverManager.getConnection(	"jdbc:h2:./SkinSense", "SkinSense", "");
             Statement statement = conn.createStatement();
             // Usuwanie tabeli jesli juz istnieje - kolejne uruchomienie przykladu nie wygeneruje bledu:
             statement.executeUpdate("DROP TABLE IF EXISTS `Pacjenci`;");
@@ -48,7 +47,7 @@ public class SkinSenseDataBase {
     }
     static public Patient Connection(int patientID) throws SQLException, ParseException {
 
-        conn = DriverManager.getConnection(	"jdbc:h2:./test", "sa", "");
+        conn = DriverManager.getConnection(	"jdbc:h2:./SkinSense", "SkinSense", "");
         Statement statement = conn.createStatement();
         statement.execute("SELECT * FROM Pacjenci WHERE Id = " +patientID);
         ArrayList<Alergen> arrayList=new ArrayList<Alergen>(16);
@@ -79,15 +78,33 @@ public class SkinSenseDataBase {
         ResultSet rs=null;
         int IDcount=0;
         try {
-            conn = DriverManager.getConnection(	"jdbc:h2:./test", "sa", "");
+            conn = DriverManager.getConnection(	"jdbc:h2:./SkinSense", "SkinSense", "");
             Statement statement = conn.createStatement();
-            statement.execute("SELECT * FROM Pacjenci");
+            statement.execute("SELECT Count(distinct Id) FROM Pacjenci;");
             rs = statement.getResultSet();
-            rs.last();
-            IDcount=rs.getInt(1);
+            while(rs.next()) {
+                IDcount = rs.getInt(1);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return IDcount;
+    }
+
+    static public boolean exsistID(int ID)
+    {
+        int IDcount=0;
+
+        try {
+            conn = DriverManager.getConnection(	"jdbc:h2:./SkinSense", "SkinSense", "");
+            Statement statement = conn.createStatement();
+            statement.execute("SELECT * FROM Pacjenci WHERE Id = "+ID);
+            ResultSet rs = statement.getResultSet();
+            System.out.println(rs.next());
+            return  rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

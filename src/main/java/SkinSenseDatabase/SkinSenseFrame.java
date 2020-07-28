@@ -35,19 +35,19 @@ import java.util.Collection;
 
 public class SkinSenseFrame extends Application {
 
-    Stage window;
-    Button findPatientButton, pdfButton, summaryButton, afterTestButton, beforeTestButton;
+    private Stage window;
+    private Button findPatientButton, pdfButton, summaryButton, afterTestButton, beforeTestButton;
     Label findPatientLabel;
     TextField findPatientTextField;
     static PatientImage RArm1, RArm2, RArm3, LArm1, LArm2, LArm3;
 
     Patient currentPatient;
 
-    Label HistaminaL, RoztoczeFarinae, Kot, AspergiliusFurnigatus, RoztoczePteronyssinus, Pies,
+    private Label HistaminaL, RoztoczeFarinae, Kot, AspergiliusFurnigatus, RoztoczePteronyssinus, Pies,
             AlternariaAlternata, ProbaUjemnaL, HistaminaR, BylicaPospolita, Leszczyna, Zyto, PiecTraw, Brzoza,
             Tymotka, ProbaUjemnaR;
 
-    static CheckBox HistaminaLEvaluation, HistaminaLNN, RoztoczeFarinaeEvaluation, RoztoczeFarinaeNN,
+    static private  CheckBox HistaminaLEvaluation, HistaminaLNN, RoztoczeFarinaeEvaluation, RoztoczeFarinaeNN,
             KotEvaluation, KotNN, AspergiliusFurnigatusEvaluation, AspergiliusFurnigatusNN,
             RoztoczePteronyssinusEvaluation, RoztoczePteronyssinusNN, PiesEvaluation, PiesNN,
             AlternariaAlternataEvaluation, AlternariaAlternataNN, ProbaUjemnaLEvaluation, ProbaUjemnaLNN,
@@ -59,7 +59,7 @@ public class SkinSenseFrame extends Application {
     static ArrayList<CheckBox> AIlist;
     static ArrayList<Label> Labellist;
 
-    static TextField patientID, patientBirthDate, patientGender, patientBMI;
+    private static TextField patientID, patientBirthDate, patientGender, patientBMI;
     Label patientData;
 
     public static void main(String[] args) {
@@ -362,14 +362,10 @@ public class SkinSenseFrame extends Application {
         testLabel.setPadding(new Insets(3, 0, 0, 0));
 
         afterTestButton = new Button("After Test");
-        afterTestButton.setOnAction(e->{
-            loadImageFiles(currentPatient,"1");
-        });
+        afterTestButton.setOnAction(e->loadImageFiles(currentPatient,"1"));
 
         beforeTestButton = new Button("Before Test");
-        beforeTestButton.setOnAction(e->{
-            loadImageFiles(currentPatient,"0");
-        });
+        beforeTestButton.setOnAction(e->loadImageFiles(currentPatient,"0"));
 
         Data.getChildren().addAll(patientData, patientID, patientBirthDate, patientGender, patientBMI,testLabel,afterTestButton,beforeTestButton);
         borderPane.setTop(Data);
@@ -387,27 +383,16 @@ public class SkinSenseFrame extends Application {
         RArm2 = new PatientImage();
         RArm3= new PatientImage();
 
-        LArm1.viewImage.setOnMouseClicked(event -> {
-            fullSizeImage(LArm1);
-        });
-        LArm2.viewImage.setOnMouseClicked(event -> {
-            fullSizeImage(LArm2);
-        });
-        LArm3.viewImage.setOnMouseClicked(event -> {
-            fullSizeImage(LArm3);
-        });
+        LArm1.viewImage.setOnMouseClicked(event -> fullSizeImage(LArm1));
+        LArm2.viewImage.setOnMouseClicked(event -> fullSizeImage(LArm2));
+        LArm3.viewImage.setOnMouseClicked(event -> fullSizeImage(LArm3));
 
-        RArm1.viewImage.setOnMouseClicked(event -> {
-            fullSizeImage(RArm1);
-        });
-        RArm2.viewImage.setOnMouseClicked(event -> {
-            fullSizeImage(RArm2);
-        });
-        RArm3.viewImage.setOnMouseClicked(event -> {
-            fullSizeImage(RArm3);
-        });
+        RArm1.viewImage.setOnMouseClicked(event -> fullSizeImage(RArm1));
+        RArm2.viewImage.setOnMouseClicked(event -> fullSizeImage(RArm2));
+        RArm3.viewImage.setOnMouseClicked(event -> fullSizeImage(RArm3));
+
         Label leftForeArm=new Label("Right \nForearm");
-        leftForeArm.setFont(Font.font("Verdana", FontWeight.BOLD, 20));;
+        leftForeArm.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         leftForeArm.setPrefHeight(200);
 
         Label rightForeArm=new Label("Left \nForearm");
@@ -531,7 +516,8 @@ public class SkinSenseFrame extends Application {
     }
 
     public static Patient findPatient(int IDtoFind) throws SQLException, ParseException {
-        Patient patient;
+        Patient patient=null;
+        try {
         patient = SkinSenseDataBase.Connection(IDtoFind);
         patientID.setText("ID: " + patient.getID());
         patientBirthDate.setText("Birth Date: " + new SimpleDateFormat("dd.MM.yyyy").format(patient.getBirthDate()));
@@ -540,35 +526,34 @@ public class SkinSenseFrame extends Application {
         patientBMI.setText("BMI: " + patient.getBMI());
 
         for (int i = 0; i < 16; i++) {
-            if (patient.alergeny.get(i).evaluation == 1)
-            {
+            if (patient.alergeny.get(i).evaluation == 1) {
                 EVlist.get(i).setSelected(true);
-            }
-            else
-            {
+            } else {
                 EVlist.get(i).setSelected(false);
             }
-            if (patient.alergeny.get(i).decison == 1)
-            {
+            if (patient.alergeny.get(i).decison == 1) {
                 AIlist.get(i).setSelected(true);
-            }
-            else
-            {
+            } else {
                 AIlist.get(i).setSelected(false);
             }
-            if(patient.alergeny.get(i).evaluation == 1 || patient.alergeny.get(i).decison == 1)
-            {
+            if (patient.alergeny.get(i).evaluation == 1 || patient.alergeny.get(i).decison == 1) {
                 Labellist.get(i).setFont(Font.font("Verdana", FontWeight.BOLD, 13));
                 Labellist.get(i).setTextFill(Color.RED);
-            }
-            else
-            {
+            } else {
                 Labellist.get(i).setFont(Font.getDefault());
                 Labellist.get(i).setTextFill(Color.BLACK);
             }
         }
-        loadImageFiles(patient,"1");
-        loadImageFiles(patient,"0");
+        loadImageFiles(patient, "1");
+        loadImageFiles(patient, "0");
+        }
+        catch(NullPointerException e)
+        {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setHeaderText("Input not valid");
+            errorAlert.setContentText("User ID does not exist!");
+            errorAlert.showAndWait();
+        }
         return patient;
     }
 
@@ -577,9 +562,9 @@ public class SkinSenseFrame extends Application {
         Collection<File> all = new ArrayList<File>();
         String IDFolder = "";
         if (patient.getID() < 10)
-            IDFolder = "00" + Integer.toString(patient.getID());
+            IDFolder = "00" + patient.getID();
         else if (patient.getID() < 100)
-            IDFolder = "0" + Integer.toString(patient.getID());
+            IDFolder = "0" + patient.getID();
         else if (patient.getID() < 1000)
             IDFolder = Integer.toString(patient.getID());
         addTree(new File("." + File.separator + "data" + File.separator + IDFolder + File.separator + stringFolder + File.separator), all);
