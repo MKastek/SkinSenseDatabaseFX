@@ -369,6 +369,7 @@ public class SkinSenseFrame extends Application {
 
         Data.getChildren().addAll(patientData, patientID, patientBirthDate, patientGender, patientBMI,testLabel,afterTestButton,beforeTestButton);
         borderPane.setTop(Data);
+        Data.setAlignment(Pos.CENTER);
 
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
@@ -393,11 +394,12 @@ public class SkinSenseFrame extends Application {
 
         Label leftForeArm=new Label("Right \nForearm");
         leftForeArm.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        leftForeArm.setPrefHeight(200);
+        leftForeArm.setPrefHeight(bounds.getHeight()*0.2720);
 
         Label rightForeArm=new Label("Left \nForearm");
         rightForeArm.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        rightForeArm.setPrefHeight(200);
+        rightForeArm.setPrefHeight(bounds.getHeight()*0.2720);
+
 
         gridPane.add(leftForeArm,0,0);
         gridPane.add(rightForeArm,0,1);
@@ -411,6 +413,7 @@ public class SkinSenseFrame extends Application {
         gridPane.add(LArm3.viewImage, 3, 1);
 
         borderPane.setCenter(gridPane);
+
 
         //Arraylist of GUI elements
         EVlist = new ArrayList<CheckBox>(16) {
