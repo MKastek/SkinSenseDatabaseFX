@@ -35,7 +35,8 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.18</version>
         </dependency>
-        <dependency>
+
+         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.4.197</version>
