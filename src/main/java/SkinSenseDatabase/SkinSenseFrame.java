@@ -644,12 +644,15 @@ public class SkinSenseFrame extends Application {
         VBox box = new VBox();
         try {
             Image image = new Image(new FileInputStream(patientImage.filePath));
-            box.getChildren().addAll(new ImageView(image));
+            ImageView view = new ImageView(image);
+            view.setFitHeight(image.getHeight()*0.75);
+            view.setFitWidth(image.getWidth()*0.75);
+            box.getChildren().addAll(view);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         border.setCenter(box);
-        Scene scene1 = new Scene(border, patientImage.viewImage.getImage().getWidth(), patientImage.viewImage.getImage().getHeight());
+        Scene scene1 = new Scene(border, patientImage.viewImage.getImage().getWidth()*0.75, patientImage.viewImage.getImage().getHeight()*0.75);
         Window.initModality(Modality.WINDOW_MODAL);
         Window.setScene(scene1);
         Window.show();
