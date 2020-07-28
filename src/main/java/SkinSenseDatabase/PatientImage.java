@@ -9,18 +9,16 @@ import java.io.FileNotFoundException;
 
 public class PatientImage {
 
-    private Image blankImage;
     private Image loadedImage;
     public String filePath;
     ImageView viewImage;
-    PatientImage(){
+    PatientImage() throws FileNotFoundException {
         viewImage=new ImageView();
-    }
-    PatientImage(PatientImage p){
-        viewImage=new ImageView();
-        this.viewImage=p.viewImage;
-        this.filePath=p.filePath;
-        this.loadedImage=p.loadedImage;
+        FileInputStream imageStream = new FileInputStream("./blankImage.png");
+        viewImage.setImage(new Image(imageStream));
+        viewImage.setPreserveRatio(true);
+        viewImage.setFitHeight(SkinSenseFrame.windowHeight*0.25);
+        viewImage.setFitHeight(SkinSenseFrame.windowHeight*0.25);
     }
 
     public void load(String file)
