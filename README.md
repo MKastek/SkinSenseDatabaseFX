@@ -14,4 +14,4 @@ User can compare images before and after test and generate PDF report with comme
 | *Summary window with sorting and filtering data* |
 
 ## Report
-Sample of PDF Report: [Report](https://github.com/MKastek/SkinSenseDatabaseFX/blob/master/Readme/Patient45.pdf)
+Sample of PDF Report: [Report](https://github.com/MKastek/SkinSenseDatabaseFX/blob/master/Readme/Patient45.pdf).
