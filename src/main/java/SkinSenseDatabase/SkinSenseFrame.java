@@ -61,6 +61,7 @@ public class SkinSenseFrame extends Application {
 
     private static TextField patientID, patientBirthDate, patientGender, patientBMI;
     Label patientData;
+    static double windowHeight;
 
     public static void main(String[] args) {
         launch(args);
@@ -75,6 +76,7 @@ public class SkinSenseFrame extends Application {
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
+        windowHeight=bounds.getHeight();
 
         window = stage;
         window.setTitle("SkinSense Database");
@@ -413,6 +415,7 @@ public class SkinSenseFrame extends Application {
         gridPane.add(LArm3.viewImage, 3, 1);
 
         borderPane.setCenter(gridPane);
+        gridPane.setAlignment(Pos.CENTER);
 
 
         //Arraylist of GUI elements

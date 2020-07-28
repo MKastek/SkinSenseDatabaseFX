@@ -31,9 +31,8 @@ public class PatientImage {
             loadedImage=new Image(imageStream);
             viewImage.setImage(loadedImage);
             viewImage.setPreserveRatio(true);
-            viewImage.setFitHeight(250);
-            viewImage.setFitHeight(250);
-
+            viewImage.setFitHeight(SkinSenseFrame.windowHeight*0.3);
+            viewImage.setFitHeight(SkinSenseFrame.windowHeight*0.3);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
